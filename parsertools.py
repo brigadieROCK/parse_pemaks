@@ -25,8 +25,8 @@ host_server = "imap.yandex.ru"
 login='testindustriation@yandex.ru'
 password = '125478963Qq'
 
-filepath_up = 'tovars-pneumax-update-price.csv'
-filepath_nl = 'tovars-pneumax-null-price.csv'
+filepath_up = 'tovars-pemaks-update-price.csv'
+filepath_nl = 'tovars-pemaks-null-price.csv'
 filename_up = os.path.basename(filepath_up)
 filename_nl = os.path.basename(filepath_nl)
 
@@ -128,13 +128,11 @@ def read_native_table():
 
 
 def post_read(old, data):
-    f = open('tovars-pneumax-update-price.csv', 'w', encoding='utf-8')
-    f_null = open('tovars-pneumax-null-price.csv', 'w', encoding='utf-8')
-    names = ['product_id', 'model', 'date']
-    wr = csv.DictWriter(f, delimiter=';', lineterminator="\r", fieldnames=names)
-    wr_nulls = csv.DictWriter(f_null, delimiter=';', lineterminator="\r", fieldnames=names)
-    wr.writeheader()
-    wr.writerow({'date': str(datetime.now())})
+    f_null = open('tovars-pemaks-null-price.csv', 'w', encoding='utf-8')
+    names_not_null = ['product_id', 'price', 'date']
+    names_null = ['product_id', 'sku', 'date']
+    wr_nulls = csv.DictWriter(f_null, delimiter=';', lineterminator="\r", fieldnames=names_null)
+
     wr_nulls.writeheader()
     wr_nulls.writerow({'date': str(datetime.now())})
     mass_null = []
@@ -145,14 +143,14 @@ def post_read(old, data):
                 flag = False
                 break
         if(flag):
+            wr_nulls.writerow({'product_id': old[i]['product_id'], 'sku': old[i]['sku']})
             mass_null.append(str(old[i]['product_id']))
-            wr.writerow({'product_id': old[i]['product_id'], 'model': i})
-    # for s in mass_null:
-    #     data['products'].append({"product_id":s, "price": float(0.0000), "remote_store": 0})
 
-    f.close()
-    f_null = open('tovars-pneumax-null-price.csv', 'w', encoding='utf-8')
     for s in mass_null:
-        wr.writerow({'product_id': old[i]['product_id'], 'model': i})
-        data['products'].append({"product_id":s, "price": float(0.0000), "remote_store": 0, "remote_store_days": 0})
+        data['products'].append({"product_id":s, "benchmark_price": float(0.0000), "remote_store": 0,"remote_store_days": 0})
+    f_null.close()
+    # f_null = open('tovars-pneumax-null-price.csv', 'w', encoding='utf-8')
+    # for s in mass_null:
+    #     wr_nulls.writerow({'product_id': s, 'model': s})
+    #     data['products'].append({"product_id":s, "price": float(0.0000), "remote_store": 0, "remote_store_days": 0})
     return len(mass_null), data

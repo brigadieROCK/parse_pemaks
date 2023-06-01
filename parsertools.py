@@ -14,10 +14,10 @@ from email.mime.text import MIMEText
 
 
 
-#send_addr = 'ka@industriation.ru'
+send_addr = 'ka@industriation.ru'
 
 
-send_addr = 'petraevvladimirmailru@mail.ru'
+#send_addr = 'petraevvladimirmailru@mail.ru'
 id = "3d33e0bfdf054c8690e95e47286a224c"
 token = "y0_AgAAAABpdHKKAAmLJQAAAADh8wCrJJ0g0oOJQb6o2fRiGeKksfzUq6M"
 secret = "b5b951dfcdd442079cb4d863d6532532"

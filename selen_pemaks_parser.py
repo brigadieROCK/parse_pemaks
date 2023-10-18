@@ -100,7 +100,7 @@ for i in data['products']:
     wr.writerow({'product_id':i['product_id'], 'benchmark_price':i['benchmark_price'], 'remote_store':i['remote_store']})
 f.close()
 
-basic = HTTPBasicAuth('admin', '^*&GKJG*%*&5312')
+basic = HTTPBasicAuth('login', 'pasword')
 url = 'https://products.industriation.com/api.php?api=update_product&other_db=ind_db'
 bad_flag = False
 

@@ -22,8 +22,8 @@ id = "3d33e0bfdf054c8690e95e47286a224c"
 token = "y0_AgAAAABpdHKKAAmLJQAAAADh8wCrJJ0g0oOJQb6o2fRiGeKksfzUq6M"
 secret = "b5b951dfcdd442079cb4d863d6532532"
 host_server = "imap.yandex.ru"
-login='testindustriation@yandex.ru'
-password = '125478963Qq'
+login='Login_mail'
+password = 'pass_mail'
 
 filepath_up = 'tovars-pemaks-update-price.csv'
 filepath_nl = 'tovars-pemaks-null-price.csv'
